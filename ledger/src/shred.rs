@@ -563,14 +563,14 @@ impl Shred {
         }
     }
 
-    pub(crate) fn num_data_shreds(&self) -> Result<u16, Error> {
+    pub fn num_data_shreds(&self) -> Result<u16, Error> {
         match self {
             Self::ShredCode(shred) => Ok(shred.num_data_shreds()),
             Self::ShredData(_) => Err(Error::InvalidShredType),
         }
     }
 
-    pub(crate) fn num_coding_shreds(&self) -> Result<u16, Error> {
+    pub fn num_coding_shreds(&self) -> Result<u16, Error> {
         match self {
             Self::ShredCode(shred) => Ok(shred.num_coding_shreds()),
             Self::ShredData(_) => Err(Error::InvalidShredType),
@@ -1044,7 +1044,7 @@ impl TryFrom<u8> for ShredVariant {
     }
 }
 
-pub(crate) fn recover(
+pub fn recover(
     shreds: Vec<Shred>,
     reed_solomon_cache: &ReedSolomonCache,
 ) -> Result<Vec<Shred>, Error> {
